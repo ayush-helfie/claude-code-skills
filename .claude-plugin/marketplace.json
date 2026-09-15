@@ -3,5 +3,11 @@
   "owner": {
     "name": "Ayush Singh"
   },
-  "plugins": []
+  "plugins": [
+    {
+      "name": "mobile-pr-review",
+      "source": "./plugins/mobile-pr-review",
+      "description": "Senior-level, evidence-driven code review for Android/Kotlin pull requests"
+    }
+  ]
 }
