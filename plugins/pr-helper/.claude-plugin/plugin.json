@@ -1,0 +1,5 @@
+{
+  "name": "pr-helper",
+  "description": "Writes PR titles and bodies that stay in sync with the Jira ticket: HD key, ticket ACs as a checklist (researched in Jira/Confluence and confirmed with you when unclear), verification and build for QA. Blocks gh pr create until the body has acceptance criteria.",
+  "version": "0.1.0"
+}
