@@ -5,11 +5,6 @@
   },
   "plugins": [
     {
-      "name": "mobile-pr-review",
-      "source": "./plugins/mobile-pr-review",
-      "description": "Senior-level, evidence-driven code review for Android/Kotlin pull requests"
-    },
-    {
       "name": "pr-helper",
       "source": "./plugins/pr-helper",
       "description": "Writes PR titles and bodies that stay in sync with the Jira ticket: HD key, ticket ACs as a checklist (researched in Jira/Confluence and confirmed with you when unclear), verification and build for QA. Blocks gh pr create until the body has acceptance criteria."
