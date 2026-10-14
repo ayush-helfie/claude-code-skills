@@ -49,7 +49,7 @@ def deny(reason):
 def main():
     hook_input = json.load(sys.stdin)
     command = hook_input.get("tool_input", {}).get("command", "")
-    if not re.search(r"\bgh\s+pr\s+create\b", command):
+    if not re.search(r"(?:^|[;&|(])\s*gh\s+pr\s+create\b", command, re.MULTILINE):
         return
     reason = denial_reason(command, hook_input.get("cwd", os.getcwd()))
     if reason:
