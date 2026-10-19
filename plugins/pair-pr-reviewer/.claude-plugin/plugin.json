@@ -1,0 +1,5 @@
+{
+  "name": "pair-pr-reviewer",
+  "description": "Pair-reviews a pull request with you group by group: gathers Jira/Confluence context, shows findings as tables, posts only the comments you pick, marks reviewed files as viewed, and reviews the tests last.",
+  "version": "0.1.0"
+}
