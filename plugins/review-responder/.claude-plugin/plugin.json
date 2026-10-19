@@ -1,0 +1,5 @@
+{
+  "name": "review-responder",
+  "description": "Works through review comments on your PR with you: verifies each against the code and its consumers, decides non-test comments one at a time, batches test comments, plans the fixes, then replies to and resolves threads and updates the PR description.",
+  "version": "0.1.0"
+}
