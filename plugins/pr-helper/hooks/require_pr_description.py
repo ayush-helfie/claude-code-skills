@@ -3,8 +3,18 @@ import os
 import re
 import sys
 
-MARKER = "## Acceptance criteria"
+REQUIRED_MARKERS = (
+    "**Ticket:**",
+    "## User-Facing Changes",
+    "## Technical Changes",
+    "## Feature Flags",
+    "## Risks",
+    "## Acceptance criteria",
+)
 MISSING_DESCRIPTION_REASON = "Use the pr-helper:pr-description skill to write this PR's title and body first."
+MISSING_SECTIONS_REASON = (
+    "PR body is missing: {missing}. Use the pr-helper:pr-description skill to write the body in the org template."
+)
 UNREADABLE_BODY_FILE_REASON = (
     "Couldn't read body file {path}. Write it in a separate step before gh pr create, or use an absolute path."
 )
@@ -26,14 +36,27 @@ def read_body(path):
         return None
 
 
+def missing_markers(text):
+    return [marker for marker in REQUIRED_MARKERS if marker not in text]
+
+
+def missing_reason(text):
+    missing = missing_markers(text)
+    if not missing:
+        return None
+    if len(missing) == len(REQUIRED_MARKERS):
+        return MISSING_DESCRIPTION_REASON
+    return MISSING_SECTIONS_REASON.format(missing=", ".join(missing))
+
+
 def denial_reason(command, cwd):
     path = body_file_path(command, cwd)
     if path is None:
-        return None if MARKER in command else MISSING_DESCRIPTION_REASON
+        return missing_reason(command)
     body = read_body(path)
     if body is None:
-        return None if MARKER in command else UNREADABLE_BODY_FILE_REASON.format(path=path)
-    return None if MARKER in body else MISSING_DESCRIPTION_REASON
+        return None if not missing_markers(command) else UNREADABLE_BODY_FILE_REASON.format(path=path)
+    return missing_reason(body)
 
 
 def deny(reason):
